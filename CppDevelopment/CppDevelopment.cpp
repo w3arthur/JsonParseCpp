@@ -2,7 +2,6 @@
 // begins and ends there.
 //
 
-
 //https://github.com/nlohmann/json
 
 #define DEBUG_MODE 1
@@ -30,8 +29,6 @@ using json = nlohmann::json;
 
 int main()
 {
-    
-    
 
     vector<Person> persons;
     string buffer{ "" };
@@ -41,7 +38,8 @@ int main()
     ifstream inFile;
     inFile.open(fileName);
     if (!inFile.is_open()) throw exception("cant read the file");
-    while (inFile) {
+    while (inFile) 
+    {
         string line;
         getline(inFile, line);
         buffer += line;
