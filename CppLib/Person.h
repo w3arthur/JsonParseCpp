@@ -35,3 +35,4 @@ private:
 public:
 	friend ostream& operator<<(ostream& os, const Person& p);
 };
+
