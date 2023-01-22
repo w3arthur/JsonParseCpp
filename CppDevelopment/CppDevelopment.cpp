@@ -41,9 +41,8 @@ int main()
     while (inFile) 
     {
         string line;
-        getline(inFile, line);
+        getline(inFile >> ws, line);
         buffer += line;
-        inFile >> ws;
     }
 
     inFile.close();
