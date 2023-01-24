@@ -31,20 +31,23 @@ int main()
 {
 
     vector<Person> persons;
-    string buffer{ "" };
+    string buffer;
     int personCounter{ 0 };
 
     string fileName = "mock-data.json";
     ifstream inFile;
     inFile.open(fileName);
     if (!inFile.is_open()) throw exception("cant read the file");
-    while (inFile) 
-    {
-        string line;
-        getline(inFile >> ws, line);
-        buffer += line;
-    }
-
+    inFile.seekg(0, std::ios::end);//
+    buffer.resize(inFile.tellg());//
+    inFile.seekg(0, std::ios::beg);//
+    inFile.read(&buffer[0], buffer.size());//
+    //while (inFile) 
+    //{
+    //    string line;
+    //    getline(inFile >> ws, line);
+    //    buffer += line;
+    //}
     inFile.close();
 
     auto jsonItems = json::parse(buffer);
@@ -62,9 +65,9 @@ int main()
 
 
 #if DEBUG_MODE == 1
-    std::cout << "Debugging mode\n";
+    std::cout << "\nDebugging mode\n";
     for (auto p : persons)
-        cout << p << "\n";
+        cout << p << '\n';
     cin.get();  //debug  
 #endif // DEBUG
 }
