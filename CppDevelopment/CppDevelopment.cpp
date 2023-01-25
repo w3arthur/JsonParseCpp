@@ -42,12 +42,7 @@ int main()
     buffer.resize(inFile.tellg());//
     inFile.seekg(0, std::ios::beg);//
     inFile.read(&buffer[0], buffer.size());//
-    //while (inFile) 
-    //{
-    //    string line;
-    //    getline(inFile >> ws, line);
-    //    buffer += line;
-    //}
+    //while (inFile) { string line; getline(inFile >> ws, line); buffer += line; }
     inFile.close();
 
     auto jsonItems = json::parse(buffer);
