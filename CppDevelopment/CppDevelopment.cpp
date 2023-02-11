@@ -47,14 +47,14 @@ int main()
 
     auto jsonItems = json::parse(buffer);
 
-    for (auto& el : jsonItems.items()) {   /*array list*/
-        auto key = el.key();
+    for (auto& person_el : jsonItems.items()) {   /*array list*/
+        auto key = person_el.key();
         ++personCounter;
-        auto poupleValue = el.value();
-        Person p;
+        auto poupleValue = person_el.value();
+        Person person;
         for (auto& [subkey, subval] : poupleValue.items()) 
-            p.setValue(subkey, subval);
-        persons.push_back(p);
+            person.setValue(subkey, to_string(subval));
+        persons.push_back(person);
     }
 
 

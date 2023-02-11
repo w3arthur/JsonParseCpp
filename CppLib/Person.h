@@ -30,7 +30,7 @@ private:
 	};
 
 public:
-	void setValue(string const& key, json const& value) { setValueMap[key](to_string(value)); };
+	void setValue(string const& key, string const& value) { setValueMap[key](value); };
 private:
 	string print() const;
 public:
