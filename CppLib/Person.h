@@ -7,7 +7,7 @@ using std::unordered_map;
 using std::function;
 using std::pair;
 
-typedef unordered_map<string, function<void(const json&)>> mapValueType;
+
 
 class Person
 {
@@ -20,20 +20,20 @@ public:
 	string ip_address;
 
 private:
-	::mapValueType setValueMap{
-		pair("id",[&](const json& value)-> void { id = static_cast<int>(value); })
-		, pair("first_name",[&](const json& value)-> void { first_name = value; })
-		, pair("last_name",[&](const json& value)-> void { last_name = value; })
-		, pair("email",[&](const json& value)-> void { email = value; })
-		, pair("gender",[&](const json& value)-> void { gender = value; })
-		, pair("ip_address",[&](const json& value)-> void { ip_address = value; })
+	unordered_map<string, function<void(string const&)>> setValueMap{
+		pair("id",[&](string const& value)-> void { id = stoi(value); })
+		, pair("first_name",[&](string const& value)-> void { first_name = value; })
+		, pair("last_name",[&](string const& value)-> void { last_name = value; })
+		, pair("email",[&](string const& value)-> void { email = value; })
+		, pair("gender",[&](string const& value)-> void { gender = value; })
+		, pair("ip_address",[&](string const& value)-> void { ip_address = value; })
 	};
 
 public:
-	void setValue(const string& key, const json& value) { setValueMap[key](value); };
+	void setValue(string const& key, json const& value) { setValueMap[key](to_string(value)); };
 private:
 	string print() const;
 public:
-	friend ostream& operator<<(ostream& os, const Person& p);
+	friend ostream& operator<<(ostream& os, Person const& p);
 };
 
