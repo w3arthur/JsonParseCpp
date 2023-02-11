@@ -7,6 +7,8 @@ using std::unordered_map;
 using std::function;
 using std::pair;
 
+typedef unordered_map<string, function<void(const json&)>> mapValueType;
+
 class Person
 {
 public:
@@ -18,8 +20,7 @@ public:
 	string ip_address;
 
 private:
-	unordered_map<string, function<void(const json&)>> setValueMap
-	{
+	::mapValueType setValueMap{
 		pair("id",[&](const json& value)-> void { id = static_cast<int>(value); })
 		, pair("first_name",[&](const json& value)-> void { first_name = value; })
 		, pair("last_name",[&](const json& value)-> void { last_name = value; })
@@ -27,6 +28,7 @@ private:
 		, pair("gender",[&](const json& value)-> void { gender = value; })
 		, pair("ip_address",[&](const json& value)-> void { ip_address = value; })
 	};
+
 public:
 	void setValue(const string& key, const json& value) { setValueMap[key](value); };
 private:
